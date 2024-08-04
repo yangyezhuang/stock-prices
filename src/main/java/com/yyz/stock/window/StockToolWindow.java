@@ -14,6 +14,7 @@ import java.util.List;
 
 import com.yyz.stock.GetStockPriceResponse;
 import com.yyz.stock.StockPriceHandler;
+import com.yyz.stock.dialog.PayDialog;
 import com.yyz.stock.storage.StockSettingsState;
 import com.yyz.stock.utils.DateUtil;
 import org.jetbrains.annotations.NotNull;
@@ -25,10 +26,10 @@ import org.jetbrains.annotations.NotNull;
  * @version $ Id: StockToolWindow.java, v 1.0 2024年08月04日 15:26 yangyz Exp $
  * @since 1.0
  */
-
 public class StockToolWindow implements ToolWindowFactory {
     private JPanel mainPanel;
     private JButton refreshButton;
+    private JButton payButton;
     private JBTable stockTable;
     private DefaultTableModel tableModel;
     private JLabel lastUpdatedLabel;
@@ -41,10 +42,12 @@ public class StockToolWindow implements ToolWindowFactory {
         // 创建按钮
         JPanel buttonPanel = new JPanel();
         refreshButton = new JButton("刷新");
+        payButton = new JButton("支持");
         lastUpdatedLabel = new JLabel("上次更新: " + DateUtil.getDateTime());
-        buttonPanel.add(refreshButton);
-        buttonPanel.add(lastUpdatedLabel);
 
+        buttonPanel.add(lastUpdatedLabel);
+        buttonPanel.add(refreshButton);
+        buttonPanel.add(payButton);
         // 创建表格
         Object[][] data = getDataArray();
         tableModel = new DefaultTableModel(data, columnNames);
@@ -60,6 +63,7 @@ public class StockToolWindow implements ToolWindowFactory {
 
         // 添加按钮操作逻辑
         refreshButton.addActionListener(e -> refreshFetchingStockPrice());
+        payButton.addActionListener(e -> new PayDialog(project).show());
     }
 
     /**
