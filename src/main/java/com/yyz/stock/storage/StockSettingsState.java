@@ -2,6 +2,8 @@ package com.yyz.stock.storage;
 
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,6 +14,10 @@ import org.jetbrains.annotations.Nullable;
  * @version $ Id: StockSettingsState.java, v 1.0 2024年08月04日 15:16 yangyz Exp $
  * @since 1.0
  */
+@State(
+        name = "com.yyz.stock.storage.StockSettingsState",
+        storages = @Storage("StockPluginSettings.xml")
+)
 public class StockSettingsState implements PersistentStateComponent<StockSettingsState> {
 
     /**

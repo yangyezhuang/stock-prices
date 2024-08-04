@@ -16,7 +16,6 @@ repositories {
 
 // 依赖
 dependencies {
-//    implementation("com.github.mwiede:jsch:0.2.18")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
 }
 

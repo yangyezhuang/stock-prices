@@ -10,12 +10,12 @@ import com.intellij.ui.table.JBTable;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.Date;
 import java.util.List;
 
 import com.yyz.stock.GetStockPriceResponse;
 import com.yyz.stock.StockPriceHandler;
 import com.yyz.stock.storage.StockSettingsState;
+import com.yyz.stock.utils.DateUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -40,8 +40,8 @@ public class StockToolWindow implements ToolWindowFactory {
 
         // 创建按钮
         JPanel buttonPanel = new JPanel();
-        refreshButton = new JButton("Refresh");
-        lastUpdatedLabel = new JLabel("Last Updated: " + new Date());
+        refreshButton = new JButton("刷新");
+        lastUpdatedLabel = new JLabel("上次更新: " + DateUtil.getDateTime());
         buttonPanel.add(refreshButton);
         buttonPanel.add(lastUpdatedLabel);
 
@@ -54,7 +54,6 @@ public class StockToolWindow implements ToolWindowFactory {
         mainPanel.add(buttonPanel, BorderLayout.NORTH);
         mainPanel.add(new JScrollPane(stockTable), BorderLayout.CENTER);
 
-//        ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         ContentFactory contentFactory = ContentFactory.getInstance();
         Content content = contentFactory.createContent(mainPanel, "", false);
         toolWindow.getContentManager().addContent(content);
@@ -70,7 +69,7 @@ public class StockToolWindow implements ToolWindowFactory {
         Object[][] data = getDataArray();
         tableModel = new DefaultTableModel(data, columnNames);
         stockTable.setModel(tableModel);
-        lastUpdatedLabel.setText("Last Updated: " + new Date());
+        lastUpdatedLabel.setText("上次更新: " + DateUtil.getDateTime());
     }
 
     /**
