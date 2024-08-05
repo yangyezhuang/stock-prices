@@ -1,4 +1,4 @@
-package com.yyz.stock;
+package com.yyz.stock.setting;
 
 import javax.swing.*;
 

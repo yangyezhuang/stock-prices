@@ -1,12 +1,11 @@
-package com.yyz.stock;
+package com.yyz.stock.service.impl;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.hutool.http.HttpUtil;
+import com.yyz.stock.model.GetStockPriceResponse;
+import com.yyz.stock.service.IStockService;
 
 /**
  * 股票价格
@@ -15,7 +14,7 @@ import java.util.List;
  * @version $ Id: StockPriceHandler.java, v 1.0 2024年08月04日 15:25 yangyz Exp $
  * @since 1.0
  */
-public class StockPriceHandler {
+public class StockServiceImpl implements IStockService {
 
     /**
      * 腾讯的股票API接口
@@ -23,19 +22,14 @@ public class StockPriceHandler {
     private String STOCK_API_TX = "https://qt.gtimg.cn/q=";
 
     public List<GetStockPriceResponse> fetchStockPrice(String stockSymbol) {
-        OkHttpClient client = OkHttpClientSingleton.getInstance();
         String url = STOCK_API_TX + stockSymbol;
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
         String responseData = "";
         List<GetStockPriceResponse> stockPriceResponseList = new ArrayList<>();
         try {
-            Response response = client.newCall(request).execute();
-            responseData = response.body().string();
+            responseData = HttpUtil.get(url);
             stockPriceResponseList = dealData(responseData);
             System.out.println(responseData);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return stockPriceResponseList;

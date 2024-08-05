@@ -16,7 +16,10 @@ repositories {
 
 // 依赖
 dependencies {
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+// https://mvnrepository.com/artifact/cn.hutool/hutool-all
+    implementation("cn.hutool:hutool-all:5.7.16")
+// https://mvnrepository.com/artifact/com.alibaba/fastjson
+    implementation("com.alibaba:fastjson:1.2.78")
 }
 
 // Configure Gradle IntelliJ Plugin

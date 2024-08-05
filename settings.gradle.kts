@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "StockPrice"
+rootProject.name = "stock-prices"

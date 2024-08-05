@@ -1,4 +1,4 @@
-package com.yyz.stock;
+package com.yyz.stock.model;
 
 /**
  * 股票结果返回

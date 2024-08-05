@@ -24,7 +24,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <applicationService serviceImplementation="com.yyz.stock.storage.StockSettingsState"/>
-        <projectConfigurable instance="com.yyz.stock.config.StockConfig"/>
-        <toolWindow id="Stock Prices" anchor="right" icon="/icons/stock.svg" factoryClass="com.yyz.stock.window.StockToolWindow"/>
+        <projectConfigurable instance="com.yyz.stock.setting.StockConfig"/>
+        <toolWindow id="Stock Prices" anchor="right" icon="/icons/stock.svg" factoryClass="com.yyz.stock.factory.StockToolWindow"/>
     </extensions>
 </idea-plugin>

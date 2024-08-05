@@ -1,8 +1,7 @@
-package com.yyz.stock.config;
+package com.yyz.stock.setting;
 
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.util.NlsContexts;
-import com.yyz.stock.StockSettingsComponent;
 import com.yyz.stock.storage.StockSettingsState;
 import org.jetbrains.annotations.Nullable;
 

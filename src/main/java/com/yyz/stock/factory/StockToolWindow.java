@@ -1,4 +1,4 @@
-package com.yyz.stock.window;
+package com.yyz.stock.factory;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
@@ -12,8 +12,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-import com.yyz.stock.GetStockPriceResponse;
-import com.yyz.stock.StockPriceHandler;
+import com.yyz.stock.model.GetStockPriceResponse;
+import com.yyz.stock.service.IStockService;
+import com.yyz.stock.service.impl.StockServiceImpl;
 import com.yyz.stock.dialog.PayDialog;
 import com.yyz.stock.storage.StockSettingsState;
 import com.yyz.stock.utils.DateUtil;
@@ -34,6 +35,8 @@ public class StockToolWindow implements ToolWindowFactory {
     private DefaultTableModel tableModel;
     private JLabel lastUpdatedLabel;
     private final String[] columnNames = {"股票名称", "股票编号", "当前价格", "涨跌%", "昨收", "今开"};
+
+    private IStockService stockService = new StockServiceImpl();
 
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
@@ -83,8 +86,7 @@ public class StockToolWindow implements ToolWindowFactory {
      */
     private Object[][] getDataArray() {
         String stockSymbol = StockSettingsState.getInstance().stockSymbol;
-        StockPriceHandler handler = new StockPriceHandler();
-        List<GetStockPriceResponse> getStockPriceResponseList = handler.fetchStockPrice(stockSymbol);
+        List<GetStockPriceResponse> getStockPriceResponseList = stockService.fetchStockPrice(stockSymbol);
         Object[][] data = new Object[getStockPriceResponseList.size()][];
         for (int i = 0; i < getStockPriceResponseList.size(); i++) {
             GetStockPriceResponse stockPriceResponse = getStockPriceResponseList.get(i);
